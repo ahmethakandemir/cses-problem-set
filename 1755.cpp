@@ -5,25 +5,12 @@ const int MAX = 2e5;
 const int MOD = 1e9+7;
 const int INF = 1e18;
 
-void rec(unordered_map<char,int> m, char index){
-    if (index > 'Z'){
-        return;
-    }
-    if (m[index] == 0){
 
-    }           //// RECURSIVE DUSUN.
-    cout << index;
-    m[index]--;
-    rec(m,index + 1);
-    cout << index;
-    return;
-}
 
 signed main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);
     string inp;
     cin >> inp;
-    int i = 0;
     unordered_map<char,int> m;
     // for (char c = 'A'; c <= 'Z'; c++){
     //     m[c] = 0;
@@ -38,7 +25,6 @@ signed main() {
             oddcounter++;
             odd = p.first;
         }
-        p.second /= 2;
     }
     // if oddcounter > 1
     if (oddcounter > 1) {
@@ -46,7 +32,20 @@ signed main() {
         return 0;
     }
 
-    rec(m,'A');
+	vector<char> v;
+	for (auto a:m){
+	if (a.second & 1) { 
+	continue;}
+	for (int i = 0; i < a.second; i+=2) v.push_back(a.first);
+	}
+	for (int i = 0; i<v.size(); i++){
+	cout << v[i];
+	}
+	if (odd != '\0') cout << odd;
+		for (int i = v.size() -1; i>-1; i--){
+	cout << v[i];
+	}
+
     return 0;
 
     // for (auto ou : m){
