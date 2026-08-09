@@ -1,0 +1,197 @@
+{
+	"initia":{
+		"prefix": "sup_init",
+		"body": [
+			"#include <bits/stdc++.h>",
+			"#define int long long",
+			"using namespace std;",
+			"",
+			"signed main() {",
+			"\tios_base::sync_with_stdio(false);cin.tie(NULL);",
+			"}"	
+		],
+		"description":"init"
+	},
+	"Initiate": {
+		"prefix": "sup_init",
+		"body": [
+    "#if __has_include(\"bits/stdc++.h\")",
+    "    #include \"bits/stdc++.h\"",
+    "#elif __has_include(<bits/stdc++.h>)",
+    "    #include <bits/stdc++.h>",
+    "#else",
+    "    #error \"bits/stdc++.h not found\"",
+    "#endif",
+    "",
+    "using namespace std;",
+    "#define ll long long",
+    "#define int long long",
+    "#define endl \"\\n\"",
+    "",
+    "#define pii pair<int, int>",
+    "#define vi vector<int>",
+    "#define vvi vector<vector<int>>",
+    "#define mii map<int, int>",
+    "#define si set<int>",
+    "#define sc set<char>",
+    "",
+    "#define f(i,s,e) for(int i=s;i<e;++i)",
+    "#define rf(i,e,s) for(int i=e;i>s;--i)",
+    "#define pb push_back",
+    "#define sortv(v) sort(v.begin(), v.end())",
+    "",
+    "#define yes cout << \"YES\"",
+    "#define no cout << \"NO\"",
+    "#define printv(v) f(i,0,v.size()) {cout << v[i] << \" \";} cout << endl;",
+    "#define printvv(v) f(i,0,v.size()) {f(j,0,v[i].size()) {cout << v[i][j] << \" \";} cout << endl;}",
+    "",
+    "const int MAX = 2e5;",
+    "const int MOD = 1e9+7;",
+    "const int INF = 1e18;",
+    "",
+    "",
+    "",
+    "void solve() {",
+	"    ",
+    "    return;",
+    "}",
+    "",
+    "signed main() {",
+    "    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);",
+    "    int T = 1;",
+    "    // cin >> T;",
+    "    while (T--) {",
+    "        solve();",
+    "    }",
+    "}"
+		],
+		"description": "Initiate"
+	},
+
+	"Fast Power Function": {
+		"prefix": "sup_fastpow",
+		"body": [
+    "int fpow(int a, int b) {",
+    "    int res=1;",
+    "    while (b) {",
+    "        if (b&1) res=(res*a)%MOD;",
+    "        a=(a*a)%MOD;",
+    "        b>>=1;",
+    "    }",
+    "    return res;",
+    "}"
+		],
+		"description": "Insert a fast power function"
+	},
+
+	"Pbds": {
+		"prefix": "sup_pbds",
+		"body": [
+			"#include <ext/pb_ds/assoc_container.hpp>",
+			"#include <ext/pb_ds/tree_policy.hpp>",
+			"using namespace __gnu_pbds;"
+		],
+		"description": "Pbds"
+	},
+
+	"Segment Tree": {
+		"prefix": "sup_segmeent_tree",
+		"body": [
+			"class SegmentTree {",
+			"private:",
+			"\tint n;",
+			"\tvector<int> a;",
+			"\tint combine(int a, int b) {",
+			"\t\treturn a + b;",
+			"\t}",
+			"\t",
+			"public:",
+			"\tSegmentTree(int size) : n(size), a(2*size) {}",    
+			"\t",
+			"\tvoid build(const vector<int>& arr) {",
+			"\t\tfor (int i = 0; i < n; ++i) a[n + i] = arr[i];", 
+			"\t\tfor (int i = n - 1; i > 0; --i)",
+			"\t\t\ta[i] = combine(a[i << 1], a[i << 1 | 1]);",    
+			"\t}",
+			"\t",
+			"\tvoid modify(int p, int value) {",
+			"\t\tfor (a[p += n] = value; p > 1; p >>= 1)",        
+			"\t\t\ta[p >> 1] = combine(a[p], a[p ^ 1]);",
+			"\t}",
+			"\t",
+			"\tint query(int l, int r) {",
+			"\t\tint res = 0;",
+			"\t\tfor (l += n, r += n; l < r; l >>= 1, r >>= 1) {",
+			"\t\t\tif (l & 1) res = combine(res, a[l++]);",       
+			"\t\t\tif (r & 1) res = combine(res, a[--r]);",       
+			"\t\t}",
+			"\t\treturn res;",
+			"\t}",
+			"};"
+		],
+		"description": "Segment Tree"
+	},
+
+	"Fenwick Tree": {
+	"prefix": "sup_fenwick_tree",
+	"body": [
+		"class FenwickTree {",
+		"public:",
+		"    int n;",
+		"    vi fw;",
+		"    FenwickTree(int sz) : n(sz), fw(sz+1, 0) {}",
+		"",
+		"    void add(int i, int x) {",
+		"        assert(0 <= i && i <= n);",
+		"        while (i <= n) {",
+		"            fw[i] += x;",
+		"            i += i&-i;",
+		"        }",
+		"    }",
+		"",
+		"    void start(vi& v) {",
+		"        assert(v.size() == n);",
+		"        f(i,0,n) add(i, v[i]);",
+		"    }",
+		"",
+		"    int sum(int i) {",
+		"        assert(0 <= i && i <= n);",
+		"        int s = 0;",
+		"        while (i >= 1) {",
+		"            s += fw[i];",
+		"            i -= i&-i;",
+		"        }",
+		"        return s;",
+		"    }",
+		"",
+		"    int query(int l, int r) {",
+		"        assert(l <= r);",
+		"        return sum(r) - sum(l-1);",
+		"    }",
+		"};"
+	],
+	"description": "Fenwick Tree"
+	},
+	
+	"": {
+		"prefix": "sup_",
+		"body": [
+
+		],
+		"description": ""
+	},
+
+	"fast pow": {
+		"prefix": "fpow",
+		"body": [
+			"int fpow(int a, int b) {",
+			"    if (b == 0) return 1;",
+			"    int u = fpow(a, b / 2);",
+			"    u = (u * u) % MOD;",
+			"    if (b & 1) u = (u * a) % MOD;",
+			"    return u;",
+			"}"
+		],
+		"description": "Recursive fast power"
+	}
+}
